@@ -39,21 +39,7 @@ public class RhinozoelefantSucher {
         }
     }
 
-    private int laengstesBein(int startX, int endeX, int y) {
-        int rekordtiefe = -1;
-        for (int i = startX; i < endeX; i++) {
-            boolean imBein = true;
-            int j = y;
-            while (imBein) { //NPE!
-                j++;
-                if (!swBild[i][j]){
-                    imBein = false;
-                    if (j > rekordtiefe) rekordtiefe = j - y;
-                }
-            }
-        }
-        return rekordtiefe;
-    }
+
 
     private void rechteckFilter(int startX, int endeX, int startY) {
         // Kriterium 2: Ist es ein ausreichend grosses Rechteck?
@@ -74,6 +60,23 @@ public class RhinozoelefantSucher {
         }
         return endeY;
     }
+
+    private int laengstesBein(int startX, int endeX, int y) {
+        int rekordtiefe = -1;
+        for (int i = startX; i < endeX; i++) {
+            boolean imBein = true;
+            int j = y;
+            while (imBein) { //NPE!
+                j++;
+                if (!swBild[i][j]){
+                    imBein = false;
+                    if (j > rekordtiefe) rekordtiefe = j - y;
+                }
+            }
+        }
+        return rekordtiefe;
+    }
+
     private void anatomieFilter(int startX, int endeX, int y) {
         // Kriterium 3: Passen Beine dran?
         // Versuchen wir mal irgendwo im 1. Drittel 5 Px Bein  dranzuklatschen
