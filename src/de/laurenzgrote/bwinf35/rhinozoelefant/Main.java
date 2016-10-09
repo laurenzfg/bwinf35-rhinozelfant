@@ -1,5 +1,7 @@
 package de.laurenzgrote.bwinf35.rhinozoelefant;
 
+import de.laurenzgrote.bwinf35.rhinozoelefant.gui.GUI;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -16,32 +18,34 @@ public class Main {
         ImageIO.write(zuVerarbeitendesBild.getGefiltertesBild(), "png", ziel);
     }
     public void bildeingabeMitGUI() throws IOException {
-        final FileFilter filter = new FileNameExtensionFilter("Bilder",
-                "gif", "png", "jpg");
+//        final FileFilter filter = new FileNameExtensionFilter("Bilder",
+//                "gif", "png", "jpg");
+//
+//        File quelle = null;
+//        File ziel = null;
+//
+//        final JFileChooser jFileChooser = new JFileChooser();
+//        jFileChooser.setFileFilter(filter);
+//        int returnVal = jFileChooser.showOpenDialog(null);
+//
+//        if (returnVal == JFileChooser.APPROVE_OPTION) {
+//            quelle = jFileChooser.getSelectedFile();
+//        } else {
+//            System.err.println("Bitte Quelldatei angeben!");
+//            System.exit(-1);
+//        }
+//
+//        returnVal = jFileChooser.showSaveDialog(null);
+//        if (returnVal == JFileChooser.APPROVE_OPTION) {
+//            ziel = jFileChooser.getSelectedFile();
+//        } else {
+//            System.err.println("Bitte Zielatei angeben!");
+//            System.exit(-1);
+//        }
+//
+//        verarbeiteBild(quelle, ziel);
 
-        File quelle = null;
-        File ziel = null;
-
-        final JFileChooser jFileChooser = new JFileChooser();
-        jFileChooser.setFileFilter(filter);
-        int returnVal = jFileChooser.showOpenDialog(null);
-
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            quelle = jFileChooser.getSelectedFile();
-        } else {
-            System.err.println("Bitte Quelldatei angeben!");
-            System.exit(-1);
-        }
-
-        returnVal = jFileChooser.showSaveDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            ziel = jFileChooser.getSelectedFile();
-        } else {
-            System.err.println("Bitte Zielatei angeben!");
-            System.exit(-1);
-        }
-
-        verarbeiteBild(quelle, ziel);
+        GUI gui = new GUI();
     }
     public static void main(String[] args) throws IOException {
         Main main = new Main();
