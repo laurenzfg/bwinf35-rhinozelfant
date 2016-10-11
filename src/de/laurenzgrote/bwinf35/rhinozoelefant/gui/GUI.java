@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -77,47 +79,51 @@ public class GUI extends JFrame {
     }
 
     private void registriereOeffnenListener() {
-        bildLaden.addActionListener(actionEvent -> {
+        bildLaden.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                final JFileChooser jFileChooser = new JFileChooser();
+                jFileChooser.setFileFilter(filter);
+                int returnVal = jFileChooser.showOpenDialog(null);
 
-            final JFileChooser jFileChooser = new JFileChooser();
-            jFileChooser.setFileFilter(filter);
-            int returnVal = jFileChooser.showOpenDialog(null);
-
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                File quelle = jFileChooser.getSelectedFile();
-                try {
-                    ursprungsbild = ImageIO.read(quelle);
-                    originalBild.setBackgroundImage(ursprungsbild);
-                    bild = new Bild(quelle, true); // In der GUI brauchen wir DEBUG
-                    zwischenbildWahlPanel.setBackgroundImage(bild.getDebugGleichfarbige());
-                    endBild.setBackgroundImage(bild.getGefiltertesBild());
-                } catch (IOException e) {
-                    System.err.println("I/O-Error beim Laden der Bilddatei!");
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File quelle = jFileChooser.getSelectedFile();
+                    try {
+                        ursprungsbild = ImageIO.read(quelle);
+                        originalBild.setBackgroundImage(ursprungsbild);
+                        bild = new Bild(quelle, true); // In der GUI brauchen wir DEBUG
+                        zwischenbildWahlPanel.setBackgroundImage(bild.getDebugGleichfarbige());
+                        endBild.setBackgroundImage(bild.getGefiltertesBild());
+                    } catch (IOException e) {
+                        System.err.println("I/O-Error beim Laden der Bilddatei!");
+                    }
+                } else {
+                    System.err.println("Bitte Quelldatei angeben; Ladevorgang abgebrochen!");
                 }
-            } else {
-                System.err.println("Bitte Quelldatei angeben; Ladevorgang abgebrochen!");
             }
         });
     }
     private void registriereExportierenListener() {
-        bildExportieren.addActionListener(actionEvent -> {
-            File ziel = null;
+        bildExportieren.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                File ziel = null;
 
-            final JFileChooser jFileChooser = new JFileChooser();
-            jFileChooser.setFileFilter(filter);
+                final JFileChooser jFileChooser = new JFileChooser();
+                jFileChooser.setFileFilter(filter);
 
-            int returnVal = jFileChooser.showSaveDialog(null);
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                try {
-                    ziel = jFileChooser.getSelectedFile();
-                    ImageIO.write(bild.getGefiltertesBild(), "png", ziel);
-                } catch (IOException e) {
-                    System.err.println("I/O-Error beim Speichern der Bilddatei!");
+                int returnVal = jFileChooser.showSaveDialog(null);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        ziel = jFileChooser.getSelectedFile();
+                        ImageIO.write(bild.getGefiltertesBild(), "png", ziel);
+                    } catch (IOException e) {
+                        System.err.println("I/O-Error beim Speichern der Bilddatei!");
+                    }
+                } else {
+                    System.err.println("Bitte Zielatei angeben; Speichern abgebrochen");
                 }
-            } else {
-                System.err.println("Bitte Zielatei angeben; Speichern abgebrochen");
             }
         });
     }
-
 }
