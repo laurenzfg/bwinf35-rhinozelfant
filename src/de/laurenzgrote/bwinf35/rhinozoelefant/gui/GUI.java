@@ -107,7 +107,7 @@ public class GUI extends JFrame {
         bildExportieren.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                File ziel = null;
+                File ziel;
 
                 final JFileChooser jFileChooser = new JFileChooser();
                 jFileChooser.setFileFilter(filter);
