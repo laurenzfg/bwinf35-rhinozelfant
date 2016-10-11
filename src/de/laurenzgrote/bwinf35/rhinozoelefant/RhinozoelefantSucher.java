@@ -6,7 +6,7 @@ import java.util.Stack;
 public class RhinozoelefantSucher {
 
     // Konstanten
-    final int MINIMALBREITE, MINIMALHOEHE, MINIMALBEIN;
+    private final int MINIMALBREITE, MINIMALHOEHE, MINIMALBEIN;
 
     private boolean[][] swBild;
     HashSet<int[]> rhinozoelefantenFelder = new HashSet<>();
@@ -66,7 +66,7 @@ public class RhinozoelefantSucher {
         // Versuchen wir mal irgendwo im 1. Drittel 5 Px Bein  dranzuklatschen
         int rechtesBeinLaenge = laengstesBein(startX, (int) Math.floor(startX * 1.3), y);
         int linkesBeinLaenge = laengstesBein((int) Math.floor((endeX - startX) * 0.6) + startX, endeX, y);
-        if (rechtesBeinLaenge > MINIMALHOEHE && linkesBeinLaenge > MINIMALHOEHE) {
+        if (rechtesBeinLaenge > MINIMALBEIN && linkesBeinLaenge > MINIMALBEIN) {
             // 4. Befindet isch zwischen den beiden Beinen eine große Lücke (min 50%)
             int j;
             if (rechtesBeinLaenge < linkesBeinLaenge) {
