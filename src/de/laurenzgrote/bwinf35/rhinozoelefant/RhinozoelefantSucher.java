@@ -3,13 +3,13 @@ package de.laurenzgrote.bwinf35.rhinozoelefant;
 import java.util.HashSet;
 import java.util.Stack;
 
-public class RhinozoelefantSucher {
+class RhinozoelefantSucher {
 
     // Konstanten
     private final int MINIMALBREITE, MINIMALHOEHE, MINIMALBEIN;
 
     private boolean[][] swBild;
-    HashSet<int[]> rhinozoelefantenFelder = new HashSet<>();
+    private HashSet<int[]> rhinozoelefantenFelder = new HashSet<>();
 
     public RhinozoelefantSucher(boolean[][] swBild) {
         this(swBild, 30, 10, 5);
@@ -100,7 +100,7 @@ public class RhinozoelefantSucher {
         }
         return rekordtiefe;
     }
-    public HashSet<int[]> expandElefant(int x, int y) {
+    private HashSet<int[]> expandElefant(int x, int y) {
         Stack<int[]> unbearteiteFelder = new Stack<>();
 
         int[] ursprungsfeld = new int[] {x, y};
@@ -146,7 +146,7 @@ public class RhinozoelefantSucher {
         return rhinozoelefantenFelder;
     }
 
-    public HashSet<int[]> getRhinozoelefantenFelder() {
+    HashSet<int[]> getRhinozoelefantenFelder() {
         return rhinozoelefantenFelder;
     }
 }
