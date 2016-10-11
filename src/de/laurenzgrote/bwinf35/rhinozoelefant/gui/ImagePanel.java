@@ -24,7 +24,6 @@ class ImagePanel extends JPanel {
 
         if (backgroundImage != null) {
             graphics.drawImage(backgroundImage, 20, 20, this);
-            //this.setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
         }
     }
 
