@@ -3,9 +3,6 @@ package de.laurenzgrote.bwinf35.rhinozoelefant;
 import de.laurenzgrote.bwinf35.rhinozoelefant.gui.GUI;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
 

@@ -11,16 +11,25 @@ public class Bild{
     private final int weiss = Color.WHITE.getRGB();
 
     private BufferedImage bild;
-    private boolean[][] gleichfarbigeStellen;
+
+    private boolean debugflag = false;
+
+    private boolean[][] debugGleichfarbige = null;
 
     public Bild(File file) throws IOException {
-        bild = ImageIO.read(file);
+        this (file, false);
+    }
 
-        gleichfarbigeStellen = scanneAufGleicheFelder();
+    public Bild(File file, boolean debugflag) throws IOException {
+        bild = ImageIO.read(file);
+        this.debugflag = debugflag;
+
+        boolean[][] gleichfarbigeStellen = scanneAufGleicheFelder();
 
         RhinozoelefantSucher rhinozoelefantSucher = new RhinozoelefantSucher(gleichfarbigeStellen);
         faerbeStellen(rhinozoelefantSucher.getRhinozoelefantenFelder());
     }
+
 
     private boolean[][] scanneAufGleicheFelder() {
         boolean[][] gleichfarbigeStellen = new boolean[bild.getWidth()][bild.getHeight()];
@@ -44,6 +53,9 @@ public class Bild{
             }
         }
 
+        // DEBUGTIME?
+        if (debugflag) debugGleichfarbige = util.deepCopy(gleichfarbigeStellen);
+
         return gleichfarbigeStellen;
     }
 
@@ -64,11 +76,16 @@ public class Bild{
         return (rgbA == rgbB);
     }
 
-    public boolean[][] getGleichfarbigeStellen() {
-        return gleichfarbigeStellen;
-    }
-
     public BufferedImage getGefiltertesBild() {
         return bild;
+    }
+
+    public boolean[][] getDebugGleichfarbige() {
+        if (debugGleichfarbige == null) {
+            System.err.println("Bild: Deuginformation wurden abgerufen, obwohl sich das Programm nicht im Debugmodus befindet");
+            // Radikale Lösung, der Fehler dürfte zur Laufzeit bei korrekter Programmierung nicht auftreten!
+            System.exit(-1);
+        }
+        return debugGleichfarbige;
     }
 }
