@@ -2,10 +2,10 @@ package de.laurenzgrote.bwinf35.rhinozoelefant;
 
 import java.util.Arrays;
 
-public class util {
+class util {
     // Geklaut von Stackoverflow:
     // http://stackoverflow.com/questions/1564832/how-do-i-do-a-deep-copy-of-a-2d-array-in-java
-    public static boolean[][] deepCopy(boolean[][] original) {
+    static boolean[][] deepCopy(boolean[][] original) {
         if (original == null) {
             return null;
         }
