@@ -10,6 +10,8 @@ public class Main {
 
     public Main() {
     }
+
+    // Funktion zur CLI-Bearbeitung
     private void verarbeiteBild(File quelle, File ziel){
         try {
             Bild zuVerarbeitendesBild = new Bild(quelle);
@@ -22,9 +24,11 @@ public class Main {
     private void bildeingabeMitGUI() {
         new GUI();
     }
+
     public static void main(String[] args){
         Main main = new Main();
 
+        // CLI-Argument-Handler
         if (args.length != 0) {
             if (args[0].equals("--cli")) {
                 File quelle = new File(args[1]);
