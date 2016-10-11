@@ -8,28 +8,26 @@ import java.io.IOException;
 import java.util.Set;
 
 public class Bild{
-    private final int schwarz = Color.BLACK.getRGB();
     private final int weiss = Color.WHITE.getRGB();
 
-    private BufferedImage originalbild;
-    private BufferedImage ungefiltertesBild, gefiltertesBild;
+    private BufferedImage bild;
+    private boolean[][] gleichfarbigeStellen;
 
     public Bild(File file) throws IOException {
-        originalbild = ImageIO.read(file);
+        bild = ImageIO.read(file);
 
-        boolean[][] gleichfarbigeStellen = scanneAufGleicheFelder();
-        ungefiltertesBild = schreibeSWBild(gleichfarbigeStellen);
+        gleichfarbigeStellen = scanneAufGleicheFelder();
 
         RhinozoelefantSucher rhinozoelefantSucher = new RhinozoelefantSucher(gleichfarbigeStellen);
-        gefiltertesBild = faerbeStellen(rhinozoelefantSucher.getRhinozoelefantenFelder());
+        faerbeStellen(rhinozoelefantSucher.getRhinozoelefantenFelder());
     }
 
     private boolean[][] scanneAufGleicheFelder() {
-        boolean[][] gleichfarbigeStellen = new boolean[originalbild.getWidth()][originalbild.getHeight()];
+        boolean[][] gleichfarbigeStellen = new boolean[bild.getWidth()][bild.getHeight()];
 
         // Zeilenweiser Scan
-        for (int x = originalbild.getMinX(); x < originalbild.getWidth(); x++) {
-            for (int y = originalbild.getMinY(); y < originalbild.getHeight() - 1; y++) {
+        for (int x = bild.getMinX(); x < bild.getWidth(); x++) {
+            for (int y = bild.getMinY(); y < bild.getHeight() - 1; y++) {
                 if (sindFarbenGleich(x, y, x, y + 1)) {
                     gleichfarbigeStellen[x][y] = true;
                     gleichfarbigeStellen[x][y + 1] = true;
@@ -37,8 +35,8 @@ public class Bild{
             }
         }
         // Spaltenweiser Scan
-        for (int y = originalbild.getMinY(); y < originalbild.getHeight(); y++) {
-            for (int x = originalbild.getMinX(); x < originalbild.getWidth() - 1; x++) {
+        for (int y = bild.getMinY(); y < bild.getHeight(); y++) {
+            for (int x = bild.getMinX(); x < bild.getWidth() - 1; x++) {
                 if (sindFarbenGleich(x, y, x + 1,y)) {
                     gleichfarbigeStellen[x][y] = true;
                     gleichfarbigeStellen[x + 1][y] = true;
@@ -50,7 +48,7 @@ public class Bild{
     }
 
     private BufferedImage faerbeStellen(Set<int[]> stellen) {
-        BufferedImage ausgabebild = originalbild;
+        BufferedImage ausgabebild = bild;
 
         for (int[] koordinate : stellen) {
             ausgabebild.setRGB(koordinate[0], koordinate[1], weiss);
@@ -58,34 +56,19 @@ public class Bild{
         return ausgabebild;
     }
 
-    private BufferedImage schreibeSWBild(boolean[][] daten) {
-        BufferedImage ausgabebild = new BufferedImage(originalbild.getWidth(), originalbild.getHeight(), BufferedImage.TYPE_INT_ARGB);
-
-        for (int x = 0; x < daten.length; x++) {
-            for (int y = 0; y < daten[0].length; y++) {
-                if (daten[x][y]) {
-                    ausgabebild.setRGB(x, y, schwarz);
-                }
-            }
-        }
-        return ausgabebild;
-    }
 
     private boolean sindFarbenGleich(int aX, int aY, int bX, int bY) {
-        int rgbA = originalbild.getRGB(aX, aY);
-        int rgbB = originalbild.getRGB(bX, bY);
+        int rgbA = bild.getRGB(aX, aY);
+        int rgbB = bild.getRGB(bX, bY);
 
         return (rgbA == rgbB);
     }
-    public BufferedImage getOriginalbild() {
-        return originalbild;
-    }
 
-    public BufferedImage getUngefiltertesBild() {
-        return ungefiltertesBild;
+    public boolean[][] getGleichfarbigeStellen() {
+        return gleichfarbigeStellen;
     }
 
     public BufferedImage getGefiltertesBild() {
-        return gefiltertesBild;
+        return bild;
     }
 }
