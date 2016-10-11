@@ -93,17 +93,30 @@ public class GUI extends JFrame {
                     endBild.setBackgroundImage(bild.getGefiltertesBild());
                 } catch (IOException e) {
                     System.err.println("I/O-Error beim Laden der Bilddatei!");
-                    System.exit(-1);
                 }
             } else {
-                System.err.println("Bitte Quelldatei angeben!");
-                System.exit(-1);
+                System.err.println("Bitte Quelldatei angeben; Ladevorgang abgebrochen!");
             }
         });
     }
     private void registriereExportierenListener() {
         bildExportieren.addActionListener(actionEvent -> {
+            File ziel = null;
 
+            final JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.setFileFilter(filter);
+
+            int returnVal = jFileChooser.showSaveDialog(null);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                try {
+                    ziel = jFileChooser.getSelectedFile();
+                    ImageIO.write(bild.getGefiltertesBild(), "png", ziel);
+                } catch (IOException e) {
+                    System.err.println("I/O-Error beim Speichern der Bilddatei!");
+                }
+            } else {
+                System.err.println("Bitte Zielatei angeben; Speichern abgebrochen");
+            }
         });
     }
 
