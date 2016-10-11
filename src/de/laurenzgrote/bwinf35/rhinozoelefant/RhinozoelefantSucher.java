@@ -87,10 +87,12 @@ class RhinozoelefantSucher {
 
     private int laengstesBein(int startX, int endeX, int y) {
         int rekordtiefe = -1;
+
+        if (endeX > swBild.length) endeX = swBild.length;
         for (int i = startX; i < endeX; i++) {
             boolean imBein = true;
             int j = y;
-            while (imBein) { //NPE!
+            while (imBein && j < swBild[0].length) {
                 j++;
                 if (!swBild[i][j]){
                     imBein = false;
