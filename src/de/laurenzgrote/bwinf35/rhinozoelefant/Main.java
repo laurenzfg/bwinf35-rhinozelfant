@@ -10,14 +10,19 @@ public class Main {
 
     public Main() {
     }
-    private void verarbeiteBild(File quelle, File ziel) throws IOException {
-        Bild zuVerarbeitendesBild = new Bild(quelle);
-        ImageIO.write(zuVerarbeitendesBild.getGefiltertesBild(), "png", ziel);
+    private void verarbeiteBild(File quelle, File ziel){
+        try {
+            Bild zuVerarbeitendesBild = new Bild(quelle);
+            ImageIO.write(zuVerarbeitendesBild.getGefiltertesBild(), "png", ziel);
+        } catch (IOException e) {
+            System.err.printf("I/O Fehler bei Verarbeitung von %s mit Ausgabe nach %s", quelle.toString(), ziel.toString());
+        }
+
     }
-    private void bildeingabeMitGUI() throws IOException {
+    private void bildeingabeMitGUI() {
         new GUI();
     }
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         Main main = new Main();
 
         if (args.length != 0) {
