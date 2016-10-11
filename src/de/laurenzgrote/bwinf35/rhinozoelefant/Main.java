@@ -8,41 +8,14 @@ import java.io.IOException;
 
 public class Main {
 
-    public Main() throws IOException {
+    public Main() {
     }
-    public void verarbeiteBild(File quelle, File ziel) throws IOException {
+    private void verarbeiteBild(File quelle, File ziel) throws IOException {
         Bild zuVerarbeitendesBild = new Bild(quelle);
         ImageIO.write(zuVerarbeitendesBild.getGefiltertesBild(), "png", ziel);
     }
-    public void bildeingabeMitGUI() throws IOException {
-//        final FileFilter filter = new FileNameExtensionFilter("Bilder",
-//                "gif", "png", "jpg");
-//
-//        File quelle = null;
-//        File ziel = null;
-//
-//        final JFileChooser jFileChooser = new JFileChooser();
-//        jFileChooser.setFileFilter(filter);
-//        int returnVal = jFileChooser.showOpenDialog(null);
-//
-//        if (returnVal == JFileChooser.APPROVE_OPTION) {
-//            quelle = jFileChooser.getSelectedFile();
-//        } else {
-//            System.err.println("Bitte Quelldatei angeben!");
-//            System.exit(-1);
-//        }
-//
-//        returnVal = jFileChooser.showSaveDialog(null);
-//        if (returnVal == JFileChooser.APPROVE_OPTION) {
-//            ziel = jFileChooser.getSelectedFile();
-//        } else {
-//            System.err.println("Bitte Zielatei angeben!");
-//            System.exit(-1);
-//        }
-//
-//        verarbeiteBild(quelle, ziel);
-
-        GUI gui = new GUI();
+    private void bildeingabeMitGUI() throws IOException {
+        new GUI();
     }
     public static void main(String[] args) throws IOException {
         Main main = new Main();
@@ -53,10 +26,6 @@ public class Main {
                 File ziel = new File(args[2]);
 
                 main.verarbeiteBild(quelle, ziel);
-            } else if (args[0].equals("--endlessgui")) {
-                while (true) {
-                    main.bildeingabeMitGUI();
-                }
             }
         } else {
             main.bildeingabeMitGUI();
