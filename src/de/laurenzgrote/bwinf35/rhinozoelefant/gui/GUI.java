@@ -19,8 +19,7 @@ public class GUI extends JFrame {
     private Bild bild;
     private BufferedImage ursprungsbild;
 
-    private ImagePanel originalBild, endBild;
-    private ZwischenbildWahlPanel zwischenbildWahlPanel;
+    private ImagePanel originalBild, zwischenbildWahlPanel, endBild;
 
     private JButton bildLaden, bildExportieren;
 
@@ -48,7 +47,7 @@ public class GUI extends JFrame {
         originalBild = new ImagePanel();
         originalBild.setBorder(BorderFactory.createTitledBorder("Originalbild"));
 
-        zwischenbildWahlPanel = new ZwischenbildWahlPanel();
+        zwischenbildWahlPanel = new ImagePanel();
         zwischenbildWahlPanel.setBorder(BorderFactory.createTitledBorder("Zwischenbilder"));
 
         endBild = new ImagePanel();
@@ -90,7 +89,7 @@ public class GUI extends JFrame {
                     ursprungsbild = ImageIO.read(quelle);
                     originalBild.setBackgroundImage(ursprungsbild);
                     bild = new Bild(quelle, true); // In der GUI brauchen wir DEBUG
-                    zwischenbildWahlPanel.setGleichfarbigeBild(bild.getDebugGleichfarbige());
+                    zwischenbildWahlPanel.setBackgroundImage(bild.getDebugGleichfarbige());
                     endBild.setBackgroundImage(bild.getGefiltertesBild());
                 } catch (IOException e) {
                     System.err.println("I/O-Error beim Laden der Bilddatei!");
