@@ -2,7 +2,7 @@
   <artifact type="jar" name="Rhinozoelefenat:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Rhinozoelefenat_jar</output-path>
     <root id="archive" name="Rhinozoelefenat.jar">
-      <element id="module-output" name="Rhinozelfenat" />
+      <element id="module-output" name="Rhinozelfant" />
     </root>
   </artifact>
 </component>
