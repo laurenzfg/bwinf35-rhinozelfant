@@ -72,6 +72,14 @@ public class Bild{
         return gleichfarbigeStellen;
     }
 
+    // Vergleicht die Farben zweier Felder
+    private boolean sindFarbenGleich(int aX, int aY, int bX, int bY) {
+        int rgbA = bild.getRGB(aX, aY);
+        int rgbB = bild.getRGB(bX, bY);
+
+        return (rgbA == rgbB);
+    }
+
     // Färbt die Stelle im Bild weiß
     private BufferedImage faerbeStellen(Set<int[]> stellen) {
         BufferedImage ausgabebild = bild;
@@ -80,14 +88,6 @@ public class Bild{
             ausgabebild.setRGB(koordinate[0], koordinate[1], weiss);
         }
         return ausgabebild;
-    }
-
-    // Vergleicht die Farben zweier Felder
-    private boolean sindFarbenGleich(int aX, int aY, int bX, int bY) {
-        int rgbA = bild.getRGB(aX, aY);
-        int rgbB = bild.getRGB(bX, bY);
-
-        return (rgbA == rgbB);
     }
 
     public BufferedImage getGefiltertesBild() {

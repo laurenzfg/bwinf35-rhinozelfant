@@ -13,7 +13,7 @@ class RhinozelfantSucher {
 
     public RhinozelfantSucher(boolean[][] swBild) {
         // Defaults für die Konstanten
-        this(swBild, 15, 5, 3);
+        this(swBild, 24, 8, 4);
     }
 
     public RhinozelfantSucher(boolean[][] swBild, int minimalbreite, int minimalhoehe, int minimalbein) {
