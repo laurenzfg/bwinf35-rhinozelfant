@@ -1,22 +1,22 @@
-package de.laurenzgrote.bwinf35.rhinozoelefant;
+package de.laurenzgrote.bwinf35.rhinozelfant;
 
 import java.util.HashSet;
 import java.util.Stack;
 
-class RhinozoelefantSucher {
+class RhinozelfantSucher {
 
     // Konstanten
     private final int MINIMALBREITE, MINIMALHOEHE, MINIMALBEIN;
 
     private boolean[][] swBild;
-    private HashSet<int[]> rhinozoelefantenFelder = new HashSet<>();
+    private HashSet<int[]> rhinozelfantenFelder = new HashSet<>();
 
-    public RhinozoelefantSucher(boolean[][] swBild) {
+    public RhinozelfantSucher(boolean[][] swBild) {
         // Defaults für die Konstanten
         this(swBild, 30, 10, 5);
     }
 
-    public RhinozoelefantSucher(boolean[][] swBild, int minimalbreite, int minimalhoehe, int minimalbein) {
+    public RhinozelfantSucher(boolean[][] swBild, int minimalbreite, int minimalhoehe, int minimalbein) {
         this.swBild = swBild;
 
         MINIMALBREITE = minimalbreite;
@@ -94,7 +94,7 @@ class RhinozoelefantSucher {
             }
 
             if (lueckengroesse != 0) {
-                // A small step for a BwInf'ler, one giant leap for mankind: We found a rhinozolefant!
+                // A small step for a BwInf'ler, one giant leap for mankind: We found a rhinozelfant!
 
                 // Jetzt muss die Gesamtstruktur des Rhinozelfanten ermittelt werden, damit diese weiß
                 // gefärbt werden kann!
@@ -144,7 +144,7 @@ class RhinozoelefantSucher {
         //  (a) als zu markierende Fläche markiert
         //  (b) zu den Ausgangsfeldern hinzugefügt
         //  (c) als nicht gelichfarbig markiert. (Grund --> Doku)
-        rhinozoelefantenFelder.add(ursprungsfeld);
+        rhinozelfantenFelder.add(ursprungsfeld);
         unbearteiteFelder.push(ursprungsfeld);
         swBild[x][y] = false;
 
@@ -160,38 +160,38 @@ class RhinozoelefantSucher {
 
             // Rechts?
             if (((x + 1) < swBild.length) && swBild[x + 1][y]) {
-                rhinozoelefantenFelder.add(new int[] {x + 1, y});
+                rhinozelfantenFelder.add(new int[] {x + 1, y});
                 unbearteiteFelder.add(new int[] {x + 1, y});
                 swBild[x + 1][y] = false;
             }
 
             // Links?
             if (((x - 1) > 0) && swBild[x - 1][y]) {
-                rhinozoelefantenFelder.add(new int[] {x - 1, y});
+                rhinozelfantenFelder.add(new int[] {x - 1, y});
                 unbearteiteFelder.add(new int[] {x - 1, y});
                 swBild[x - 1][y] = false;
             }
 
             // Was Unten?
             if (((y + 1) < swBild[0].length) && swBild[x][y + 1]) {
-                rhinozoelefantenFelder.add(new int[] {x, y + 1});
+                rhinozelfantenFelder.add(new int[] {x, y + 1});
                 unbearteiteFelder.add(new int[] {x, y + 1});
                 swBild[x][y + 1] = false;
             }
 
             // Oben
             if (((y - 1) > 0) && swBild[x][y - 1] ) {
-                rhinozoelefantenFelder.add(new int[] {x, y - 1});
+                rhinozelfantenFelder.add(new int[] {x, y - 1});
                 unbearteiteFelder.add(new int[] {x, y - 1});
                 swBild[x][y - 1] = false;
             }
         }
 
         // Zuguterletzt werden die zu markierenden Felder ausgegeben
-        return rhinozoelefantenFelder;
+        return rhinozelfantenFelder;
     }
 
-    HashSet<int[]> getRhinozoelefantenFelder() {
-        return rhinozoelefantenFelder;
+    HashSet<int[]> getRhinozelfantenFelder() {
+        return rhinozelfantenFelder;
     }
 }

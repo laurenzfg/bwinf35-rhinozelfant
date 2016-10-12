@@ -1,4 +1,4 @@
-package de.laurenzgrote.bwinf35.rhinozoelefant;
+package de.laurenzgrote.bwinf35.rhinozelfant;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -28,10 +28,10 @@ public class Bild{
         boolean[][] gleichfarbigeStellen = scanneAufGleicheFelder();
 
         // S/W-Bild durchsuchen lassen
-        RhinozoelefantSucher rhinozoelefantSucher = new RhinozoelefantSucher(gleichfarbigeStellen);
+        RhinozelfantSucher rhinozelfantSucher = new RhinozelfantSucher(gleichfarbigeStellen);
 
         // Rhinozelfanten weiß färben
-        faerbeStellen(rhinozoelefantSucher.getRhinozoelefantenFelder());
+        faerbeStellen(rhinozelfantSucher.getRhinozelfantenFelder());
     }
 
     // Suche nach gleichfarbigen Stellen

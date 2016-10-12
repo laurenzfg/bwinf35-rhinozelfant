@@ -1,6 +1,6 @@
-package de.laurenzgrote.bwinf35.rhinozoelefant;
+package de.laurenzgrote.bwinf35.rhinozelfant;
 
-import de.laurenzgrote.bwinf35.rhinozoelefant.gui.GUI;
+import de.laurenzgrote.bwinf35.rhinozelfant.gui.GUI;
 
 import javax.imageio.ImageIO;
 import java.io.File;

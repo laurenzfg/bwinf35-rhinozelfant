@@ -1,4 +1,4 @@
-package de.laurenzgrote.bwinf35.rhinozoelefant;
+package de.laurenzgrote.bwinf35.rhinozelfant;
 
 import java.util.Arrays;
 

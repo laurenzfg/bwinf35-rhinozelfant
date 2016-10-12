@@ -1,6 +1,6 @@
-package de.laurenzgrote.bwinf35.rhinozoelefant.gui;
+package de.laurenzgrote.bwinf35.rhinozelfant.gui;
 
-import de.laurenzgrote.bwinf35.rhinozoelefant.Bild;
+import de.laurenzgrote.bwinf35.rhinozelfant.Bild;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -31,7 +31,7 @@ public class GUI extends JFrame {
 
         // Was muss das muss!
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1200, 700);
+        this.setSize(1200, 800);
 
         // In das JFrame kommt ein Bilderpanel + Knopfpanel rein
         Container container = this.getContentPane();

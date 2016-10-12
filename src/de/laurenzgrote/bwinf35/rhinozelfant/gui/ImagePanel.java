@@ -1,4 +1,4 @@
-package de.laurenzgrote.bwinf35.rhinozoelefant.gui;
+package de.laurenzgrote.bwinf35.rhinozelfant.gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,10 +8,12 @@ import java.awt.image.BufferedImage;
 class ImagePanel extends JPanel {
     private final static int schwarz = Color.BLACK.getRGB();
 
-
     private Image backgroundImage;
+
     void setBackgroundImage(BufferedImage backgroundImage) {
-        this.backgroundImage = backgroundImage.getScaledInstance(getWidth() - 40, -1, Image.SCALE_DEFAULT);
+        double maxWidth = getWidth() - 40;
+
+        this.backgroundImage = backgroundImage.getScaledInstance((int) maxWidth, -1, Image.SCALE_DEFAULT);
         this.repaint();
     }
     void setBackgroundImage(boolean[][] swBild) {
@@ -27,6 +29,7 @@ class ImagePanel extends JPanel {
         }
     }
 
+    // Helper der aus dem S/W bool Array ein BufferedImage macht
     private static BufferedImage schreibeSWBild(boolean[][] daten) {
         BufferedImage ausgabebild = new BufferedImage(daten.length, daten[0].length, BufferedImage.TYPE_INT_ARGB);
 
