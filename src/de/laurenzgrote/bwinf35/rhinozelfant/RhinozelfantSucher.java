@@ -13,7 +13,7 @@ class RhinozelfantSucher {
 
     public RhinozelfantSucher(boolean[][] swBild) {
         // Defaults für die Konstanten
-        this(swBild, 30, 10, 5);
+        this(swBild, 15, 5, 3);
     }
 
     public RhinozelfantSucher(boolean[][] swBild, int minimalbreite, int minimalhoehe, int minimalbein) {
@@ -57,14 +57,18 @@ class RhinozelfantSucher {
 
     // Hiflsfunktion zu 2, ermittelt wie weit der Strich nach unten runtergeht
     private int rechteckLimit (int startX, int endeX, int startY) {
-        int endeY = startY;
-        while (endeY < swBild[0].length) {
-            endeY++;
-            for (int i = startX; i < endeX; i++) {
-                if (!swBild[i][endeY]) return --endeY;
+        if (startY == swBild[0].length - 1) {
+            return 0; // Das letzte Y kann nicht start eines Rechteckes sein...
+        } else {
+            int endeY = startY;
+            while (endeY < swBild[0].length) {
+                endeY++;
+                for (int i = startX; i < endeX; i++) {
+                    if (!swBild[i][endeY]) return --endeY;
+                }
             }
+            return endeY;
         }
-        return endeY;
     }
 
     // Filter 3: Ist die anatomie des Rhinozelfanten vorhanden (Beine)
