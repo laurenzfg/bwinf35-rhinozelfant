@@ -95,6 +95,7 @@ class RhinozelfantSucher {
             int lueckengroesse = 0;
             for (int i = startX; i < endeX; i++) {
                 if (!swBild[i][j]) lueckengroesse++;
+                if (lueckengroesse > 0) break;
             }
 
             if (lueckengroesse != 0) {
