@@ -13,7 +13,8 @@ class RhinozelfantSucher {
 
     public RhinozelfantSucher(boolean[][] swBild) {
         // Defaults für die Konstanten
-        this(swBild, 24, 8, 4);
+        this(swBild, (int) Math.floor(swBild.length * 0.05), (int) Math.floor(swBild[0].length * 0.0125), 4);
+        //this(swBild, 24, 8, 4);
     }
 
     public RhinozelfantSucher(boolean[][] swBild, int minimalbreite, int minimalhoehe, int minimalbein) {
@@ -95,7 +96,7 @@ class RhinozelfantSucher {
             int lueckengroesse = 0;
             for (int i = startX; i < endeX; i++) {
                 if (!swBild[i][j]) lueckengroesse++;
-                if (lueckengroesse > 0) break;
+                if (lueckengroesse > 0) break; // SPEED
             }
 
             if (lueckengroesse != 0) {
@@ -143,50 +144,48 @@ class RhinozelfantSucher {
         // (siehe Doku)
         Stack<int[]> unbearteiteFelder = new Stack<>();
 
-        int[] ursprungsfeld = new int[] {x, y};
+        int[] feld = new int[] {x, y};
 
         // Das Ursprungsfeld wird:
-        //  (a) als zu markierende Fläche markiert
-        //  (b) zu den Ausgangsfeldern hinzugefügt
-        //  (c) als nicht gelichfarbig markiert. (Grund --> Doku)
-        rhinozelfantenFelder.add(ursprungsfeld);
-        unbearteiteFelder.push(ursprungsfeld);
+        //  (a) zu den Ausgangsfeldern hinzugefügt
+        //  (b) als nicht gleichfarbig markiert. (Grund --> Doku)
+        unbearteiteFelder.push(feld);
         swBild[x][y] = false;
 
         // SOLANGE Ausgangsfelder vorhanden sind
         while (!unbearteiteFelder.empty()) {
             // NEHMEN wird diese vom Stapel
-            ursprungsfeld = unbearteiteFelder.pop();
-            x = ursprungsfeld[0];
-            y = ursprungsfeld[1];
+            feld = unbearteiteFelder.pop();
+
+            //
+            rhinozelfantenFelder.add(feld);
+
+            x = feld[0];
+            y = feld[1];
 
             // und fügen alle angrenzenden gleichfarbigen Felder den
             // zu markierenden und den zu bearbeitenden hinzu
 
             // Rechts?
             if (((x + 1) < swBild.length) && swBild[x + 1][y]) {
-                rhinozelfantenFelder.add(new int[] {x + 1, y});
                 unbearteiteFelder.add(new int[] {x + 1, y});
                 swBild[x + 1][y] = false;
             }
 
             // Links?
             if (((x - 1) > 0) && swBild[x - 1][y]) {
-                rhinozelfantenFelder.add(new int[] {x - 1, y});
                 unbearteiteFelder.add(new int[] {x - 1, y});
                 swBild[x - 1][y] = false;
             }
 
-            // Was Unten?
+            // Unten?
             if (((y + 1) < swBild[0].length) && swBild[x][y + 1]) {
-                rhinozelfantenFelder.add(new int[] {x, y + 1});
                 unbearteiteFelder.add(new int[] {x, y + 1});
                 swBild[x][y + 1] = false;
             }
 
             // Oben
             if (((y - 1) > 0) && swBild[x][y - 1] ) {
-                rhinozelfantenFelder.add(new int[] {x, y - 1});
                 unbearteiteFelder.add(new int[] {x, y - 1});
                 swBild[x][y - 1] = false;
             }
