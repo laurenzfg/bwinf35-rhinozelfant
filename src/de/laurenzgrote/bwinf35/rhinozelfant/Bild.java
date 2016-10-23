@@ -24,6 +24,9 @@ public class Bild{
         bild = ImageIO.read(file);
         this.debugflag = debugflag;
 
+        // START Zeitmessung
+        long beginn = System.currentTimeMillis();
+
         // S/W-Bild aus gelichfarbigen Stellen erstellen
         boolean[][] gleichfarbigeStellen = scanneAufGleicheFelder();
 
@@ -32,6 +35,9 @@ public class Bild{
 
         // Rhinozelfanten weiß färben
         faerbeStellen(rhinozelfantSucher.getRhinozelfantenFelder());
+
+        long laufzeit = System.currentTimeMillis() - beginn;
+        System.out.println(laufzeit);
     }
 
     // Suche nach gleichfarbigen Stellen
