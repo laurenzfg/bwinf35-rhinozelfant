@@ -106,7 +106,7 @@ public class Bild{
         // der zum Abbruch zwingt, jedoch wollte ich nicht noch eine extra
         // Exception einführen.
         if (debugGleichfarbige == null) {
-            System.err.println("Bild: Deuginformation wurden abgerufen, obwohl sich das Programm nicht im Debugmodus befindet");
+            System.err.println("Bild: Debuginformation wurden abgerufen, obwohl sich das Programm nicht im Debugmodus befindet");
             // Radikale Lösung, der Fehler dürfte zur Laufzeit bei korrekter Programmierung nicht auftreten!
             System.exit(-1);
         }
