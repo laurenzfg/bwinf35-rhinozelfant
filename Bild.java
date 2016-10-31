@@ -45,28 +45,9 @@ public class Bild{
         // Erstellung eines Arrays für 2D-Bild
         boolean[][] gleichfarbigeStellen = new boolean[bild.getWidth()][bild.getHeight()];
 
-        // Scan auf gleichfarbige Punkte in gleicher Spalte
-        for (int x = bild.getMinX(); x < bild.getWidth(); x++) {
-            for (int y = bild.getMinY(); y < bild.getHeight() - 1; y++) {
-                // P(x|y) == P(x|y+1) --> Feld darunter daneben gleiche Farbe
-                // Daher auch in der Schleife -1, das tiefste Feld in der Spalte hat keinen weiteren Nachbar
-                if (sindFarbenGleich(x, y, x, y + 1)) {
-                    // Beide stellen können als gleichfarbig gespeichert werden!
-                    gleichfarbigeStellen[x][y] = true;
-                    gleichfarbigeStellen[x][y + 1] = true;
-                }
-            }
-        }
-        // Scan auf gleichfarbige Punkte in gleicher Zeile
-        for (int y = bild.getMinY(); y < bild.getHeight(); y++) {
-            // P(x|y) == P(x + 1|y) --> Feld rechts daneben gleiche Farbe
-            // Daher auch in der Schleife -1, das letzte Feld in der Zeile hat keinen weiteren Nachbar
-            for (int x = bild.getMinX(); x < bild.getWidth() - 1; x++) {
-                if (sindFarbenGleich(x, y, x + 1,y)) {
-                    // Beide stellen können als gleichfarbig gespeichert werden!
-                    gleichfarbigeStellen[x][y] = true;
-                    gleichfarbigeStellen[x + 1][y] = true;
-                }
+        for (int x = 1; x < bild.getWidth() - 1; x++) {
+            for (int y = 1; y < bild.getHeight() - 1; y++) {
+                   gleichfarbigeStellen[x][y] = istHautschuppe(x, y);
             }
         }
 
@@ -78,14 +59,17 @@ public class Bild{
         return gleichfarbigeStellen;
     }
 
-    // Vergleicht die Farben zweier Felder
-    private boolean sindFarbenGleich(int aX, int aY, int bX, int bY) {
-        int rgbA = bild.getRGB(aX, aY);
-        int rgbB = bild.getRGB(bX, bY);
-
-        return (rgbA == rgbB);
+    private boolean istHautschuppe (int x, int y) {
+        int rgbFeld = bild.getRGB(x, y);
+        int gleichfarbigeNachbarfelder = -1; // Das gleiche Feld wird markiert werden
+        for (int i = x - 1; i <= x + 1; i++) {
+            for (int j = y - 1; j <= y + 1; j++) {
+                int rgbNachbar = bild.getRGB(i, j);
+                if (rgbNachbar == rgbFeld) gleichfarbigeNachbarfelder++;
+            }
+        }
+        return (gleichfarbigeNachbarfelder > 2);
     }
-
     // Färbt die Stelle im Bild weiß
     private BufferedImage faerbeStellen(Set<int[]> stellen) {
         BufferedImage ausgabebild = bild;
