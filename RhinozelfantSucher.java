@@ -13,8 +13,8 @@ class RhinozelfantSucher {
 
     public RhinozelfantSucher(boolean[][] swBild) {
         // Defaults für die Konstanten
-        this(swBild, (int) Math.floor(swBild.length * 0.05), (int) Math.floor(swBild[0].length * 0.0125), 4);
-        //this(swBild, 24, 8, 4);
+
+        this(swBild, (int) Math.floor(swBild.length * 0.01), (int) Math.floor(swBild[0].length * 0.005), (int) Math.floor(swBild[0].length * 0.005));
     }
 
     public RhinozelfantSucher(boolean[][] swBild, int minimalbreite, int minimalhoehe, int minimalbein) {
