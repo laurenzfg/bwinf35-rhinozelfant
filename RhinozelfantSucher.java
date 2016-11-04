@@ -48,27 +48,32 @@ class RhinozelfantSucher {
     // also wirklich einen Körper?
     private void rechteckFilter(int startX, int endeX, int startY) {
         // Kriterium 2: n Felder lässt sich der Strich nach unten bewegen
-        int endeY = rechteckLimit(startX, endeX, startY);
+
+        int endeY = startY;
+
+        // Suchen wir die tiefste Kannte für ein Rechteck voller
+        // möglicher Hautschuppen
+
+        // Allertiefste mögliche Kante wäre letzte Zeile
+        suchschleife:
+        while (endeY < swBild[0].length) {
+            // Bügeln wir mal durch die Zeile
+            for (int i = startX; i < endeX; i++) {
+                // Ist an dieser Stelle eine Zeile tiefer ebenfalls eine mögliche Hautschuppe?
+                if (!swBild[i][endeY + 1]){
+                    // Das wars, bei diesem endeY ist an einer Stelle keine
+                    // mögliche Hautschuppe => kein Rechteck
+                    // , die Schleife können wir abbrechen, tiefer gehts net
+                    break suchschleife;
+                }
+            }
+            // Unter uns nur mögliche Hautschuppen, der Zeiger geht runter
+            endeY++;
+        }
 
         // Wen über Treshhold nächster Filter
         if (endeY - startY > MINIMALHOEHE) {
             anatomieFilter(startX, endeX, startY);
-        }
-    }
-
-    // Hiflsfunktion zu 2, ermittelt wie weit der Strich nach unten runtergeht
-    private int rechteckLimit (int startX, int endeX, int startY) {
-        if (startY == swBild[0].length - 1) {
-            return 0; // Das letzte Y kann nicht start eines Rechteckes sein...
-        } else {
-            int endeY = startY;
-            while (endeY < swBild[0].length) {
-                endeY++;
-                for (int i = startX; i < endeX; i++) {
-                    if (!swBild[i][endeY]) return --endeY;
-                }
-            }
-            return endeY;
         }
     }
 

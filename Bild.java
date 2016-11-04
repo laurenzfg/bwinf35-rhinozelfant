@@ -28,7 +28,7 @@ public class Bild{
         long beginn = System.currentTimeMillis();
 
         // S/W-Bild aus gelichfarbigen Stellen erstellen
-        boolean[][] gleichfarbigeStellen = scanneAufGleicheFelder();
+        boolean[][] gleichfarbigeStellen = scanneAufMoeglicheHautschuppen();
 
         // S/W-Bild durchsuchen lassen
         RhinozelfantSucher rhinozelfantSucher = new RhinozelfantSucher(gleichfarbigeStellen);
@@ -41,27 +41,28 @@ public class Bild{
     }
 
     // Suche nach gleichfarbigen Stellen
-    private boolean[][] scanneAufGleicheFelder() {
+    private boolean[][] scanneAufMoeglicheHautschuppen() {
         // Erstellung eines Arrays für 2D-Bild
-        boolean[][] gleichfarbigeStellen = new boolean[bild.getWidth()][bild.getHeight()];
+        boolean[][] swBild = new boolean[bild.getWidth()][bild.getHeight()];
 
         for (int x = 1; x < bild.getWidth() - 1; x++) {
             for (int y = 1; y < bild.getHeight() - 1; y++) {
-                   gleichfarbigeStellen[x][y] = istHautschuppe(x, y);
+                   swBild[x][y] = istHautschuppe(x, y);
             }
         }
 
         // DEBUGTIME?
         // Wenn ja jetzt eine Deepcopy der gleichfarbigen Bilder für die Kontrollgrafik
         // Sonst kann man sich die Zeit sparen ;-)
-        if (debugflag) debugGleichfarbige = util.deepCopy(gleichfarbigeStellen);
+        if (debugflag) debugGleichfarbige = util.deepCopy(swBild);
 
-        return gleichfarbigeStellen;
+        return swBild;
     }
 
     private boolean istHautschuppe (int x, int y) {
         int rgbFeld = bild.getRGB(x, y);
-        int gleichfarbigeNachbarfelder = -1; // Das gleiche Feld wird markiert werden
+        // Die Schleifen werden den Eingabpixel mit sich selbst vergleichen, daher Start -1
+        int gleichfarbigeNachbarfelder = -1;
         for (int i = x - 1; i <= x + 1; i++) {
             for (int j = y - 1; j <= y + 1; j++) {
                 int rgbNachbar = bild.getRGB(i, j);
