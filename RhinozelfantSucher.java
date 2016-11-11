@@ -73,7 +73,7 @@ class RhinozelfantSucher {
 
         // Wen über Treshhold nächster Filter
         if (endeY - startY > MINIMALHOEHE) {
-            anatomieFilter(startX, endeX, startY);
+            anatomieFilter(startX, endeX, endeY);
         }
     }
 
