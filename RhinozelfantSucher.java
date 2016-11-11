@@ -144,7 +144,7 @@ class RhinozelfantSucher {
 
     // Funktion um von P(x|y) aus alle erreichbaren Punkte findet
     // (nötig um den zu markierenden Bereich zu bestimmen)
-    private HashSet<int[]> expandElefant(int x, int y) {
+    private void expandElefant(int x, int y) {
         // Statt mit Rekursion mit Stack
         // (siehe Doku)
         Stack<int[]> unbearteiteFelder = new Stack<>();
@@ -195,9 +195,6 @@ class RhinozelfantSucher {
                 swBild[x][y - 1] = false;
             }
         }
-
-        // Zuguterletzt werden die zu markierenden Felder ausgegeben
-        return rhinozelfantenFelder;
     }
 
     HashSet<int[]> getRhinozelfantenFelder() {
